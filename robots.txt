@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://marigarayco.com.ar/sitemap.xml

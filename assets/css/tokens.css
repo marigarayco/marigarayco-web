@@ -1,0 +1,21 @@
+:root {
+  --cream: #f1eee6;
+  --cream-dim: #e9e5da;
+  --ink: #1b1a17;
+  --ink-soft: #55534c;
+  --line: rgba(27, 26, 23, 0.18);
+
+  --bg: #282828;
+  --bg-dim: #282828;
+  --fg: var(--cream);
+  --fg-soft: #b8b4a8;
+  --border: rgba(241, 238, 230, 0.14);
+
+  --blend-reveal: screen;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --font-display: "Mona Sans", sans-serif;
+  --font-body: "General Sans", sans-serif;
+}

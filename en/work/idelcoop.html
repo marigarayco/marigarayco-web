@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en" class="hide-scrollbar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+    <title>Idelcoop — Mari Garaycoechea</title>
+    <meta
+      name="description"
+      content="Redesign and migration of Idelcoop's site, a cooperative magazine with 50 years of history, from Drupal to WordPress."
+    />
+    <link rel="alternate" hreflang="en" href="/en/work/idelcoop.html" />
+    <link rel="alternate" hreflang="es" href="/trabajo/idelcoop.html" />
+    <link rel="canonical" href="https://marigarayco.com.ar/en/work/idelcoop.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Mari Garaycoechea" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Idelcoop — Mari Garaycoechea" />
+    <meta property="og:description" content="Redesign and migration of Idelcoop's site, a cooperative magazine with 50 years of history, from Drupal to WordPress." />
+    <meta property="og:url" content="https://marigarayco.com.ar/en/work/idelcoop.html" />
+    <meta property="og:image" content="https://marigarayco.com.ar/assets/img/work/idelcoop/idelcoop-background.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Idelcoop — Mari Garaycoechea" />
+    <meta name="twitter:description" content="Redesign and migration of Idelcoop's site, a cooperative magazine with 50 years of history, from Drupal to WordPress." />
+    <meta name="twitter:image" content="https://marigarayco.com.ar/assets/img/work/idelcoop/idelcoop-background.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/tokens.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/components.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "gsap": "/assets/js/vendor/gsap/index.js",
+          "gsap/ScrollTrigger": "/assets/js/vendor/gsap/ScrollTrigger.js",
+          "gsap/SplitText": "/assets/js/vendor/gsap/SplitText.js",
+          "gsap/CustomEase": "/assets/js/vendor/gsap/CustomEase.js",
+          "lenis": "/assets/js/vendor/lenis.mjs"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-transition-overlay" aria-hidden="true"></div>
+    <div class="page-shell">
+    <header class="site-header">
+      <a href="/en/" class="site-header__brand">marigarayco</a>
+      <nav class="site-header__nav">
+        <a href="/en/work/">Work</a>
+        <a href="/en/about.html">About</a>
+        <a href="/en/#contact">Contact</a>
+        <div class="site-header__switch" role="group" aria-label="Switch language">
+          <a href="/trabajo/idelcoop.html" class="site-header__switch-option">ES</a>
+          <span class="site-header__switch-option is-active" aria-current="true">EN</span>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <article>
+        <div class="case-study__hero-pin case-study__hero-pin--rows-parallax">
+          <header class="case-study__header case-study__header--hero case-study__header--hero-video">
+            <img width="2200" height="1238"
+              class="case-study__hero-bg-video"
+              src="/assets/img/work/idelcoop/idelcoop-background.png"
+              alt="Home page of Idelcoop's new site"
+            />
+            <div class="case-study__hero-overlay case-study__hero-overlay--none-desktop"></div>
+            <div class="case-study__hero-noise"></div>
+
+            <div class="case-study__header-copy">
+              <h1 class="case-study__title">Idelcoop</h1>
+              <p class="eyebrow">Web Development — 2026</p>
+            </div>
+          </header>
+        </div>
+
+        <div class="case-study__intro">
+          <p>
+            Full development of Idelcoop's new WordPress site, migrated from Drupal 7, as part of
+            the redesign led by El Maizal, the agency where I'm a partner.
+          </p>
+          <span class="eyebrow case-study__link">View site → Coming soon</span>
+        </div>
+
+        <div class="case-study__rows">
+          <div class="case-study__row">
+            <h2 class="case-study__row-label">Context</h2>
+            <div class="case-study__row-content">
+              <p>
+                Idelcoop is a cooperative foundation that publishes Revista Idelcoop, with 50 years
+                of history, 248 issues and over 2,500 published articles. The site ran on Drupal
+                7, a platform more than a decade old with no active maintenance. Idelcoop needed to
+                update the site to make it more accessible and intuitive, and bring it up to the
+                technical standard required by Latindex 2.0, the reference catalog for academic
+                journals.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study__gallery case-study__gallery--contain case-study__gallery--flush">
+          <video muted playsinline loop autoplay preload="metadata">
+            <source src="/assets/img/work/idelcoop/idelcoop-2.mp4" />
+          </video>
+          <video muted playsinline loop autoplay preload="metadata">
+            <source src="/assets/img/work/idelcoop/idelcoop-1.mp4" />
+          </video>
+        </div>
+
+        <div class="case-study__rows">
+          <div class="case-study__row">
+            <h2 class="case-study__row-label">The challenge</h2>
+            <div class="case-study__row-content">
+              <p>
+                A technical audit revealed the scale of the problem: 98.7% of pages missing an H1
+                tag, 78.9% missing a meta description, 2,789 groups of duplicate titles, over
+                37,000 images with no alt text, no sitemap.xml, and an active database error. On
+                top of that, navigation was unintuitive, with a bare-bones academic-journal design
+                that didn't invite exploration of the historical archive.
+              </p>
+            </div>
+          </div>
+
+          <div class="case-study__row">
+            <h2 class="case-study__row-label">My role</h2>
+            <div class="case-study__row-content">
+              <p>
+                I was in charge of the site's full WordPress development: architecture, content
+                migration and the technical implementation needed to meet academic indexing
+                standards. UX/UI redesign was led by Catalina García Laval, and overall
+                coordination and content by Agustina Silombra.
+              </p>
+            </div>
+          </div>
+
+          <div class="case-study__row">
+            <h2 class="case-study__row-label">What I built</h2>
+            <div class="case-study__row-content">
+              <ul>
+                <li>
+                  <strong>Custom WordPress theme:</strong> built from scratch for the specific
+                  needs of an academic journal, with no dependency on page builders.
+                </li>
+                <li>
+                  <strong>Content architecture:</strong> Custom Post Types for articles, issues and
+                  authors, with its own taxonomy by subject area and meta-boxes built without
+                  relying on plugins like ACF.
+                </li>
+                <li>
+                  <strong>Data migration:</strong> 2,800 Drupal nodes, 2,510 articles and 248
+                  magazine issues, with clean, persistent URLs.
+                </li>
+                <li>
+                  <strong>Academic metadata:</strong> Dublin Core on every article (15+ tags),
+                  Schema.org (JSON-LD, ScholarlyArticle type) with DOI, ISSN and license, and a
+                  sitemap segmented by content type.
+                </li>
+                <li>
+                  <strong>Institutional integration:</strong> at Idelcoop's request, I built a
+                  custom OAI-PMH 2.0 endpoint so CLACSO can index the magazine in its Virtual
+                  Library, tested against all six protocol verbs across the 2,510 articles.
+                </li>
+                <li>
+                  <strong>Baseline technical SEO:</strong> a single H1 per page, meta descriptions,
+                  a working RSS feed and an automatic sitemap.
+                </li>
+                <li>
+                  <strong>Self-management:</strong> a guide and hands-on training so the editorial
+                  team can publish new issues without depending on an outside developer.
+                </li>
+                <li>
+                  <strong>No plugins:</strong> all custom development (CPTs, taxonomies, metadata,
+                  OAI-PMH) was built entirely from scratch, with no third-party dependencies.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study__video-strip">
+          <div class="case-study__video-strip-track">
+            <img width="1897" height="867" src="/assets/img/work/idelcoop/screen-1.png" alt="Screen from Idelcoop's new site 1" />
+            <img width="1895" height="866" src="/assets/img/work/idelcoop/screen-2.png" alt="Screen from Idelcoop's new site 2" />
+            <img width="1892" height="862" src="/assets/img/work/idelcoop/screen-3.png" alt="Screen from Idelcoop's new site 3" />
+            <img width="1892" height="862" src="/assets/img/work/idelcoop/screen-4.png" alt="Screen from Idelcoop's new site 4" />
+            <img width="1892" height="861" src="/assets/img/work/idelcoop/screen-5.png" alt="Screen from Idelcoop's new site 5" />
+            <img width="1887" height="857" src="/assets/img/work/idelcoop/screen-6.png" alt="Screen from Idelcoop's new site 6" />
+            <img width="1897" height="867" src="/assets/img/work/idelcoop/screen-1.png" alt="" aria-hidden="true" />
+            <img width="1895" height="866" src="/assets/img/work/idelcoop/screen-2.png" alt="" aria-hidden="true" />
+            <img width="1892" height="862" src="/assets/img/work/idelcoop/screen-3.png" alt="" aria-hidden="true" />
+            <img width="1892" height="862" src="/assets/img/work/idelcoop/screen-4.png" alt="" aria-hidden="true" />
+            <img width="1892" height="861" src="/assets/img/work/idelcoop/screen-5.png" alt="" aria-hidden="true" />
+            <img width="1887" height="857" src="/assets/img/work/idelcoop/screen-6.png" alt="" aria-hidden="true" />
+          </div>
+        </div>
+
+        <div class="case-study__rows">
+          <div class="case-study__row">
+            <h2 class="case-study__row-label">Result</h2>
+            <div class="case-study__row-content">
+              <p>
+                Development is finished and tested on staging, awaiting launch on the final
+                domain. A technical audit against the Latindex 2.0 standard (38 items evaluated)
+                confirms the site already meets all 7 mandatory basic characteristics and 21 of
+                the remaining 31, with most of what's left being data entry rather than
+                development. Once it's live, I'll repeat the Analytics and SEO measurement to
+                compare against this baseline.
+              </p>
+            </div>
+          </div>
+
+          <div class="case-study__row case-study__row--credits">
+            <h2 class="case-study__row-label">Credits</h2>
+            <div class="case-study__row-content">
+              <p><strong>Agustina Silombra</strong> — Project management and content</p>
+              <p><strong>Catalina García Laval</strong> — UX/UI design</p>
+              <p><strong>Marisol Garaycoechea</strong> — Web development</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study__cta">
+          <p>Have a project that needs this same attention to detail?</p>
+          <div class="btn-centered">
+            <span class="btn-centered__fill" aria-hidden="true"></span>
+            <a href="/en/#contact" class="btn">
+            Let's talk
+              <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4 12h16m0 0-6-6m6 6-6 6"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <section class="case-study__related">
+        <h2>You might also like</h2>
+        <div class="work-scroll">
+          <div class="work-track">
+            <a class="project-card" href="/en/work/derechos-digitales.html">
+              <div class="project-card__media">
+                <img width="2400" height="1600"
+                  src="/assets/img/work/derechos-digitales/derechos-digitales-3.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="project-card__meta" aria-hidden="true">
+                <span>Web Development · Custom WordPress</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">Derechos Digitales</h3>
+            </a>
+
+            <a class="project-card" href="/en/work/grupo-estepa.html">
+              <div class="project-card__media">
+                <img width="2400" height="1600" src="/assets/img/work/grupo-estepa/grupoestepa-2.jpg" alt="" />
+              </div>
+              <div class="project-card__meta" aria-hidden="true">
+                <span>Web Development · One Page</span>
+                <span>2026</span>
+              </div>
+              <h3 class="project-card__title">Grupo Estepa</h3>
+            </a>
+
+            <a class="project-card" href="/en/work/clases-magistrales.html">
+              <div class="project-card__media">
+                <video
+                  src="/assets/img/work/clases-magistrales/clases-magistrales-02.mp4"
+                  muted
+                  playsinline
+                  loop
+                  autoplay
+                  preload="metadata"
+                ></video>
+              </div>
+              <div class="project-card__meta" aria-hidden="true">
+                <span>Video · Editing and Motion Graphics</span>
+                <span>2022</span>
+              </div>
+              <h3 class="project-card__title">Clases Magistrales</h3>
+            </a>
+          </div>
+        </div>
+        <a class="about-grid__cta" href="/en/work/">
+          <span class="about-grid__cta__fill" aria-hidden="true"></span>
+          <span class="about-grid__cta__label">See all work</span>
+          <span class="about-grid__cta__spacer" aria-hidden="true"></span>
+          <svg class="about-grid__cta__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 12h16m0 0-6-6m6 6-6 6"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </section>
+
+    </main>
+
+    </div>
+
+    <footer class="site-footer">
+      <div class="site-footer__bottom">
+        <div class="site-footer__col">
+          <span>© 2026</span>
+          <span>Buenos Aires, Argentina</span>
+        </div>
+        <address class="site-footer__col">
+          <a href="mailto:marigarayco@gmail.com">marigarayco@gmail.com</a>
+          <a href="https://wa.me/5491138619157" target="_blank" rel="noreferrer">+54 11 3861 9157<span class="sr-only"> (opens in a new tab)</span></a>
+        </address>
+        <div class="site-footer__col">
+          <a href="https://www.linkedin.com/in/marigarayco/" target="_blank" rel="noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
+          <a href="https://www.behance.net/marigarayco" target="_blank" rel="noreferrer">Behance<span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/assets/js/pages/work-detail.js"></script>
+
+    <script defer src="/assets/js/easter-egg.js"></script>
+  </body>
+</html>
