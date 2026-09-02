@@ -1,27 +1,30 @@
 import { gsap, ScrollTrigger } from "../core/gsap-setup.js";
 import { MEDIA } from "../core/viewport.js";
 
-// Scales `inner` down (never up) so its natural height fits within the
-// viewport height. This must run on a plain descendant, not on whatever
-// ancestor GSAP pins — ScrollTrigger snapshots/restores a pinned element's
-// own inline styles on every refresh(), which silently reverted a
-// max-height set directly on it. Capping `inner`'s own max-height instead
-// works because max-height genuinely constrains a box's layout size (unlike
-// a transform, which only affects paint), so the pinned ancestor's natural
-// auto-height shrinks to match without GSAP ever needing to know about it.
+// Shrinks the cards inside `inner` down (never up) so its natural height,
+// plus whatever vertical space its siblings (e.g. the section title above it
+// and the CTA below it) already take up, fits within the viewport height.
+// Unlike a transform on `inner` itself, this drives real layout size (via
+// the --work-card-scale custom property consumed in components.css), so
+// `inner` keeps its own full width instead of shrinking and centering with
+// dead space on either side — cards that still don't fit simply overflow
+// past it, same as at full size.
 export function initFitToViewport(inner) {
   const mm = gsap.matchMedia();
 
   mm.add(MEDIA.desktopPointerFineMotion, () => {
-    const fit = () => {
-      inner.style.transform = "none";
-      inner.style.maxHeight = "none";
-      const naturalHeight = inner.offsetHeight;
-      const ratio = Math.min(1, window.innerHeight / naturalHeight);
+    const siblingsHeight = () =>
+      [...inner.parentElement.children]
+        .filter((el) => el !== inner)
+        .reduce((sum, el) => sum + el.offsetHeight, 0);
 
-      inner.style.maxHeight = `${naturalHeight * ratio}px`;
-      inner.style.overflow = "hidden";
-      inner.style.transform = ratio < 1 ? `scale(${ratio})` : "none";
+    const fit = () => {
+      inner.style.setProperty("--work-card-scale", "1");
+      const naturalHeight = inner.offsetHeight;
+      const availableHeight = window.innerHeight - siblingsHeight();
+      const ratio = Math.min(1, Math.max(0.1, availableHeight / naturalHeight));
+
+      inner.style.setProperty("--work-card-scale", ratio < 1 ? String(ratio) : "1");
       ScrollTrigger.refresh();
     };
 
@@ -37,9 +40,7 @@ export function initFitToViewport(inner) {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
-      inner.style.maxHeight = "";
-      inner.style.overflow = "";
-      inner.style.transform = "";
+      inner.style.removeProperty("--work-card-scale");
     };
   });
 

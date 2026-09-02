@@ -36,10 +36,9 @@ document
   );
 
 const workSection = document.querySelector("#trabajo, #work");
-const workSectionScale = document.querySelector(".work-section__scale");
 const workWrapper = document.querySelector(".work-scroll");
 const workTrack = document.querySelector(".work-track");
-if (workSectionScale) initFitToViewport(workSectionScale);
+if (workWrapper) initFitToViewport(workWrapper);
 if (workSection && workWrapper && workTrack)
   initHorizontalScroll(workWrapper, workTrack, { pinTarget: workSection });
 
