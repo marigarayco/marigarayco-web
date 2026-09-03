@@ -297,6 +297,30 @@ a.site-header__switch-option:hover {
   }
 }
 
+/* Case-study (project detail) footer — mobile drops the ©/location column
+   and puts address on the left, social on the right, single row. */
+@media (max-width: 639px) {
+  .site-footer--case-study .site-footer__bottom {
+    row-gap: 0;
+  }
+
+  .site-footer--case-study .site-footer__col:nth-child(1) {
+    display: none;
+  }
+
+  .site-footer--case-study .site-footer__col:nth-child(2) {
+    grid-column: 1;
+    grid-row: 1;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .site-footer--case-study .site-footer__col:nth-child(3) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
 /* Hero */
 .hero {
   position: relative;
@@ -2064,6 +2088,28 @@ a.site-header__switch-option:hover {
   pointer-events: none;
 }
 
+/* Below 640px the caption sits vertically centered over the media (see
+   .work-gallery__info's max-width:639px rule below), so the default
+   gradient's transparent middle band would leave it unreadable — cover the
+   whole frame with a flat scrim instead. */
+@media (max-width: 639px) {
+  .work-gallery__overlay {
+    background: rgba(10, 9, 8, 0.55);
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .work-gallery__overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 9, 8, 0.5) 0%,
+      rgba(10, 9, 8, 0) 22%,
+      rgba(10, 9, 8, 0) calc(45% - 50px),
+      rgba(10, 9, 8, 0.75) 100%
+    );
+  }
+}
+
 /* Work index page — header stays fixed above the pinned horizontal gallery */
 .page-shell[data-view="gallery"] .site-header,
 .page-shell[data-view="carousel"] .site-header {
@@ -2071,23 +2117,51 @@ a.site-header__switch-option:hover {
   z-index: 20;
 }
 
-/* Toggle between the full-screen gallery and the horizontal carousel —
-   fixed above the heading row, right-aligned to match it. The carousel view
-   is driven by a scroll-pinned, horizontally-laid-out track (see
-   initHorizontalScroll), which only ever initializes on the same
-   pointer-fine desktop + motion-allowed media query gsap.matchMedia uses
-   there — on touch/mobile the track stays a plain vertical stack, so
-   "centering" a card by horizontal position is meaningless. Hide the toggle
-   everywhere that JS wouldn't attach, instead of exposing a control that
-   silently does the wrong thing.
+/* Toggle between the full-screen gallery and the horizontal carousel. On
+   desktop pointer-fine it's a fixed button beside the heading row, driving
+   the scroll-pinned horizontal track from initHorizontalScroll. Below
+   1024px (or on touch) the carousel is instead a plain native
+   horizontally-scrollable strip the user can drag/swipe (see
+   .work-scroll--toggle below) — no JS needed — so the toggle is shown there
+   too, just pinned under the header's ES/EN switch instead of near the
+   bottom.
 */
 .view-toggle {
   display: none;
 }
 
+@media (max-width: 1023px), (pointer: coarse) {
+  .view-toggle {
+    position: fixed;
+    top: 70px;
+    right: 16px;
+    z-index: 21;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: var(--cream);
+    color: var(--ink);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .view-toggle {
+    top: 100px;
+    right: 48px;
+  }
+}
+
 @media (pointer: fine) and (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   .view-toggle {
     position: fixed;
+    top: auto;
     bottom: 200px;
     right: 24px;
     z-index: 21;
@@ -2143,7 +2217,7 @@ a.site-header__switch-option:hover {
   opacity: 1;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 1024px) {
   .view-toggle {
     bottom: 190px;
     right: 48px;
@@ -2174,6 +2248,73 @@ a.site-header__switch-option:hover {
   min-height: 100vh;
 }
 
+/* Below 1024px initHorizontalScroll's GSAP pin never attaches (see the
+   .view-toggle comment above), so the carousel track here is instead a
+   plain native horizontally scrollable strip — same approach as the home
+   page's #trabajo/#work in this range. */
+@media (max-width: 1023px) {
+  .work-scroll--toggle {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .work-scroll--toggle::-webkit-scrollbar {
+    display: none;
+  }
+
+  .work-scroll--toggle .work-track {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: calc(32px * var(--work-card-scale, 1));
+  }
+
+  .work-scroll--toggle .project-card {
+    width: calc(440px * var(--work-card-scale, 1));
+    max-width: none;
+    flex-shrink: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .work-scroll--toggle .work-track::after {
+    content: "";
+    flex: 0 0 16px;
+  }
+}
+
+/* Below 640px the carousel toggle's strip goes back to a plain vertical
+   stack (same pattern as the home page's #trabajo/#work at this
+   breakpoint), scoped to .work-scroll--toggle only so the home page track
+   and .case-study__related's grid are untouched. */
+@media (max-width: 639px) {
+  .work-scroll--toggle {
+    overflow-x: visible;
+  }
+
+  .work-scroll--toggle .work-track {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .work-scroll--toggle .work-track::after {
+    content: none;
+  }
+
+  .work-scroll--toggle .project-card {
+    width: 100%;
+    max-width: none;
+    flex-shrink: 1;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .work-scroll--toggle .project-card:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+}
+
 /* Captions (title + meta) live outside the clipped items so they stay in
    front of the mask-reveal wipe instead of being clipped away with the
    media. Only the active item's info block is shown; mask-reveal.js
@@ -2200,6 +2341,14 @@ a.site-header__switch-option:hover {
   opacity: 1;
 }
 
+@media (max-width: 639px) {
+  .work-gallery__info {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+}
+
 .work-gallery__heading {
   display: flex;
   flex-direction: column;
@@ -2220,6 +2369,12 @@ a.site-header__switch-option:hover {
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--cream);
+}
+
+@media (max-width: 1023px) {
+  .work-gallery__title {
+    line-height: 1.1;
+  }
 }
 
 .work-gallery__meta {
@@ -2251,6 +2406,14 @@ a.site-header__switch-option:hover {
   }
 }
 
+@media (min-width: 640px) and (max-width: 1023px) {
+  .work-gallery__info {
+    grid-template-columns: 3fr 1fr 1fr;
+    align-items: end;
+    padding-bottom: 50px;
+  }
+}
+
 .work-gallery__nav {
   position: fixed;
   top: 50%;
@@ -2265,7 +2428,7 @@ a.site-header__switch-option:hover {
   border: none;
   border-radius: 999px;
   background: none;
-  color: var(--fg-soft);
+  color: var(--cream);
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -2276,10 +2439,12 @@ a.site-header__switch-option:hover {
 
 .work-gallery__nav--prev {
   left: 24px;
+  justify-content: flex-start;
 }
 
 .work-gallery__nav--next {
   right: 24px;
+  justify-content: flex-end;
 }
 
 @media (min-width: 640px) {
@@ -2289,6 +2454,28 @@ a.site-header__switch-option:hover {
 
   .work-gallery__nav--next {
     right: 48px;
+  }
+}
+
+/* Mobile + tablet — between .work-gallery__info's caption and
+   .work-gallery__footer instead of vertically centered, so the arrows
+   don't sit over the title/media. The footer's own content (year,
+   address, social links) is the same at every gallery item, so its
+   rendered height is constant per breakpoint — safe to hardcode here as
+   the arrows' bottom offset. */
+@media (max-width: 639px) {
+  .work-gallery__nav {
+    top: auto;
+    bottom: 113px;
+    transform: none;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .work-gallery__nav {
+    top: auto;
+    bottom: 74px;
+    transform: none;
   }
 }
 
@@ -2311,6 +2498,17 @@ a.site-header__switch-option:hover {
   pointer-events: none;
 }
 
+/* Below 640px, once the carousel toggle view stacks cards into a tall
+   vertical list (see .work-scroll--toggle), a permanently fixed footer
+   would overlap card content for the whole scroll instead of just sitting
+   under the single-screen gallery — let it sit in normal flow there. The
+   fullscreen gallery view keeps the footer fixed as before. */
+@media (max-width: 639px) {
+  .page-shell[data-view="carousel"] ~ .work-gallery__footer {
+    position: static;
+  }
+}
+
 .work-gallery__footer a {
   pointer-events: auto;
   transition: color 0.2s ease;
@@ -2324,23 +2522,32 @@ a.site-header__switch-option:hover {
   width: 100%;
 }
 
-/* The overlay has far less vertical room than the detail page's in-flow
-   footer, so the address column (2 extra lines) is dropped below 640px to
-   keep the bar short enough that it doesn't cover .work-gallery__info's
-   caption text, which sits a fixed 72px from the bottom (components.css). */
-@media (max-width: 639px) {
-  .work-gallery__footer .site-footer__bottom {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .work-gallery__footer .site-footer__bottom address {
-    display: none;
-  }
-}
 
 @media (min-width: 640px) {
   .work-gallery__footer {
     padding: 18px 48px;
+  }
+}
+
+/* Match .work-gallery__info's own column proportions (same breakpoints,
+   same left/right inset) so address's right-aligned text lines up with the
+   caption meta's second column above it. */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .work-gallery__footer .site-footer__bottom {
+    /* minmax(0, Nfr), not plain Nfr — a plain fr track's implicit auto
+       minimum lets address's un-wrapped email/phone widen this column past
+       its share, which is exactly the misalignment this is meant to fix.
+       The 24px gap matches .work-gallery__info's own column gap so the fr
+       tracks divide up the same leftover space on both grids. */
+    grid-template-columns: minmax(0, 3fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .work-gallery__footer .site-footer__bottom {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
   }
 }
 
