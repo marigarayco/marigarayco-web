@@ -969,6 +969,55 @@ a.site-header__switch-option:hover {
   }
 }
 
+/* Case study hero — mobile reflow: the sticky/pinned hero above is a
+   desktop-only concept (gated at 768px, both here and in work-detail.js's
+   scroll animations), so below it the text isn't overlaid on the image at
+   all. .case-study__hero-pin and .case-study__header--hero are collapsed
+   with display: contents so their children (the title block and the media)
+   become ordinary flex items of the article alongside .case-study__intro,
+   free to reorder: title copy, then the intro paragraph, then the image at
+   a fixed 50vh, then the rest of the article (rows, etc.) at their default
+   order. The overlay/noise existed only to keep overlaid text legible, so
+   they're dropped here along with the absolute positioning they needed. */
+@media (max-width: 767px) {
+  main#main > article {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .case-study__hero-pin,
+  .case-study__header--hero {
+    display: contents;
+  }
+
+  .case-study__header-copy {
+    order: -3;
+    padding: 88px 24px 24px;
+  }
+
+  .case-study__intro {
+    order: -2;
+    padding: 12px 24px 42px;
+  }
+
+  .case-study__hero-bg-video {
+    order: -1;
+    position: static;
+    /* The base rule's z-index: -1 is meant for when this sits absolutely
+       under the overlay — left in place once static (in normal flow under
+       a display: contents ancestor) it paints the image behind the page
+       background instead of in front of it. */
+    z-index: auto;
+    width: 100%;
+    height: 50vh;
+  }
+
+  .case-study__hero-overlay,
+  .case-study__hero-noise {
+    display: none;
+  }
+}
+
 .case-study__body {
   position: relative;
   padding: 96px 24px 0;
@@ -1363,6 +1412,18 @@ a.site-header__switch-option:hover {
   background-size: contain;
 }
 
+@media (max-width: 639px) {
+  .case-study__row-content li {
+    padding-left: 36px;
+  }
+
+  .case-study__row-content li::before {
+    top: calc((clamp(22px, 2.4vw, 32px) * 1.35 / 2) - 12px);
+    width: 24px;
+    height: 24px;
+  }
+}
+
 @media (min-width: 640px) {
   .case-study__rows {
     padding-inline: 48px;
@@ -1373,6 +1434,12 @@ a.site-header__switch-option:hover {
   .case-study__row {
     grid-template-columns: 280px 1fr;
     gap: 16px 64px;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .case-study__row {
+    grid-template-columns: 1fr 3fr;
   }
 }
 
@@ -2021,6 +2088,19 @@ a.site-header__switch-option:hover {
   position: relative;
   height: 100vh;
   overflow: hidden;
+}
+
+/* 100vh is the LARGEST viewport (browser chrome collapsed) — on a page
+   that never scrolls vertically, mobile browsers never collapse their
+   chrome, so a 100vh gallery is taller than the actual visible area and
+   its bottom edge sits scrolled out of view underneath the address
+   bar/toolbar. 100dvh tracks the real, current viewport instead, so the
+   background image's height stays fixed and fully visible regardless of
+   how much chrome the browser is showing. */
+@media (max-width: 639px) {
+  .work-gallery {
+    height: 100dvh;
+  }
 }
 
 .work-gallery-viewport {

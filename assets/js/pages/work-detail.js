@@ -17,7 +17,11 @@ if (cover) initPaintReveal(cover);
 const heroNoise = document.querySelector(".case-study__hero-noise");
 const heroCopy = document.querySelector(".case-study__header-copy");
 const heroSection = document.querySelector(".case-study__header--hero");
-if (heroSection && !prefersReducedMotion()) {
+// Below 768px the hero stops being a sticky/pinned overlay (see
+// components.css's mobile reflow) — .case-study__header--hero becomes
+// display: contents there, which has no box for ScrollTrigger to measure,
+// and there's no overlaid text to scroll away from anyway.
+if (heroSection && !prefersReducedMotion() && window.matchMedia("(min-width: 768px)").matches) {
   if (heroNoise) {
     gsap.to(heroNoise, {
       opacity: 0,
