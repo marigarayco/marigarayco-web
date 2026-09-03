@@ -274,7 +274,16 @@ a.site-header__switch-option:hover {
 @media (max-width: 639px) {
   .site-footer__bottom {
     grid-template-columns: 1fr 1fr;
-    row-gap: 8px;
+    row-gap: 20px;
+  }
+
+  .site-footer__col {
+    gap: 12px;
+  }
+
+  .site-footer__bottom a {
+    display: inline-block;
+    padding-block: 4px;
   }
 
   .site-footer__col:nth-child(1) {
