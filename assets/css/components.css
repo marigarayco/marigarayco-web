@@ -674,6 +674,40 @@ a.site-header__switch-option:hover {
   #work .project-card {
     max-width: 80vw;
   }
+
+  /* Home only — the standalone sobre-mi.html/about.html #trabajo/#work
+     (.work-section--rise) keeps the horizontal swipeable row above;
+     the home page's own list goes back to a plain vertical stack. */
+  #trabajo:not(.work-section--rise) .work-scroll,
+  #work:not(.work-section--rise) .work-scroll {
+    overflow-x: visible;
+  }
+
+  #trabajo:not(.work-section--rise) .work-track,
+  #work:not(.work-section--rise) .work-track {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #trabajo:not(.work-section--rise) .work-track::after,
+  #work:not(.work-section--rise) .work-track::after {
+    content: none;
+  }
+
+  #trabajo:not(.work-section--rise) .project-card,
+  #work:not(.work-section--rise) .project-card {
+    width: 100%;
+    max-width: none;
+    flex-shrink: 1;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  #trabajo:not(.work-section--rise) .project-card:first-child,
+  #work:not(.work-section--rise) .project-card:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -1851,6 +1885,15 @@ a.site-header__switch-option:hover {
     position: sticky;
     top: 0;
     height: 100vh;
+  }
+}
+
+/* Home only, tablet only — standalone sobre-mi.html/about.html (.about-reveal)
+   keeps the sticky media from the rule above at every width from 768 up. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #sobre-mi:not(.about-reveal) .about-grid__media,
+  #about:not(.about-reveal) .about-grid__media {
+    position: static;
   }
 }
 
