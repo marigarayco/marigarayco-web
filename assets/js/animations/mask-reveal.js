@@ -116,18 +116,21 @@ export function initMaskReveal(section, items, nav = {}) {
     else prev();
   };
 
-  let touchStartY = null;
+  // Touch swipes horizontally (left = next, right = prev) rather than
+  // vertically like the wheel — it reads as flicking through a stack of
+  // cards, and matches the clip-path wipe's left-right motion.
+  let touchStartX = null;
   const onTouchStart = (e) => {
-    touchStartY = e.touches[0].clientY;
+    touchStartX = e.touches[0].clientX;
   };
   const onTouchEnd = (e) => {
-    if (touchStartY === null) return;
-    const deltaY = touchStartY - e.changedTouches[0].clientY;
-    if (Math.abs(deltaY) > SWIPE_THRESHOLD) {
-      if (deltaY > 0) next();
+    if (touchStartX === null) return;
+    const deltaX = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+      if (deltaX > 0) next();
       else prev();
     }
-    touchStartY = null;
+    touchStartX = null;
   };
 
   section.addEventListener("wheel", onWheel, { passive: false });
