@@ -86,6 +86,28 @@ a.site-header__switch-option:hover {
   cursor: default;
 }
 
+@media (max-width: 639px) {
+  .site-header {
+    flex-wrap: nowrap;
+    padding: 16px;
+    font-size: 9px;
+  }
+
+  .site-header__nav {
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  .site-header__switch {
+    padding: 2px;
+  }
+
+  .site-header__switch-option {
+    min-width: 1.8em;
+    padding: 4px 6px;
+  }
+}
+
 @media (min-width: 640px) {
   .site-header {
     padding: 28px 48px;
@@ -205,6 +227,20 @@ a.site-header__switch-option:hover {
   color: inherit;
 }
 
+@media (max-width: 1023px) {
+  .site-footer__cta {
+    color: var(--ink);
+  }
+
+  .site-footer__cta__fill {
+    transform: scaleX(1);
+  }
+
+  .site-footer__cta__spacer {
+    flex-grow: 1;
+  }
+}
+
 .site-footer__bottom {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -237,7 +273,23 @@ a.site-header__switch-option:hover {
 
 @media (max-width: 639px) {
   .site-footer__bottom {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 8px;
+  }
+
+  .site-footer__col:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .site-footer__col:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .site-footer__col:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
   }
 }
 
@@ -418,6 +470,28 @@ a.site-header__switch-option:hover {
   padding: 32px 24px 64px;
 }
 
+@media (max-width: 639px) {
+  #trabajo .page-header,
+  #work .page-header {
+    padding-bottom: 8px;
+  }
+
+  #trabajo .work-scroll,
+  #work .work-scroll {
+    padding-top: 8px;
+  }
+
+  .project-card:not(:first-child) {
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  #trabajo .work-track,
+  #work .work-track {
+    gap: 24px;
+  }
+}
+
 .work-track {
   display: flex;
   flex-direction: column;
@@ -429,6 +503,12 @@ a.site-header__switch-option:hover {
   width: 100%;
   flex-direction: column;
   gap: calc(16px * var(--work-card-scale, 1));
+}
+
+@media (max-width: 639px) {
+  .project-card {
+    gap: 8px;
+  }
 }
 
 .project-card__media {
@@ -1394,12 +1474,52 @@ a.site-header__switch-option:hover {
   margin-top: 120px;
 }
 
+@media (max-width: 639px) {
+  #sobre-mi,
+  #about {
+    margin-top: 0;
+  }
+
+  /* Home only (standalone about/sobre-mi pages carry .about-reveal and keep
+     their own hero-pinned layout) — image first, then the section title. */
+  #sobre-mi:not(.about-reveal),
+  #about:not(.about-reveal) {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  #sobre-mi:not(.about-reveal) .about-grid,
+  #about:not(.about-reveal) .about-grid {
+    display: contents;
+  }
+
+  #sobre-mi:not(.about-reveal) .page-header,
+  #about:not(.about-reveal) .page-header {
+    order: 2;
+    padding: 0 24px;
+  }
+
+  #sobre-mi:not(.about-reveal) .about-grid__media,
+  #about:not(.about-reveal) .about-grid__media {
+    order: 1;
+    margin-inline: 0;
+    width: 100%;
+  }
+
+  #sobre-mi:not(.about-reveal) .about-grid__copy,
+  #about:not(.about-reveal) .about-grid__copy {
+    order: 3;
+    padding: 0 24px 96px;
+  }
+}
+
 .about-grid__media {
   position: relative;
   overflow: hidden;
   border-radius: 2px;
-  margin-left: -24px;
-  width: calc(100% + 24px);
+  margin-left: 0;
+  width: 100%;
 }
 
 @media (min-width: 640px) {
@@ -1416,12 +1536,24 @@ a.site-header__switch-option:hover {
   object-fit: cover;
 }
 
+@media (max-width: 639px) {
+  .about-grid__media img {
+    margin-top: -15px;
+  }
+}
+
 .about-grid__copy {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 32px;
   padding-top: 100px;
+}
+
+@media (max-width: 639px) {
+  .about-grid__copy {
+    padding-top: 0;
+  }
 }
 
 .about-grid__copy-text {
@@ -1501,6 +1633,21 @@ a.site-header__switch-option:hover {
   width: 20px;
   height: auto;
   color: inherit;
+}
+
+@media (max-width: 1023px) {
+  .about-grid__cta {
+    padding-inline: 24px;
+    color: var(--ink);
+  }
+
+  .about-grid__cta__fill {
+    transform: scaleX(1);
+  }
+
+  .about-grid__cta__spacer {
+    flex-grow: 1;
+  }
 }
 
 .skills-list {
