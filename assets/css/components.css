@@ -274,16 +274,11 @@ a.site-header__switch-option:hover {
 @media (max-width: 639px) {
   .site-footer__bottom {
     grid-template-columns: 1fr 1fr;
-    row-gap: 20px;
+    row-gap: 12px;
   }
 
   .site-footer__col {
     gap: 12px;
-  }
-
-  .site-footer__bottom a {
-    display: inline-block;
-    padding-block: 4px;
   }
 
   .site-footer__col:nth-child(1) {
@@ -427,6 +422,12 @@ a.site-header__switch-option:hover {
   color: var(--fg);
 }
 
+@media (max-width: 639px) {
+  .page-header {
+    padding-block: 24px;
+  }
+}
+
 @media (min-width: 640px) {
   .page-header {
     padding: 16px 48px 32px;
@@ -493,11 +494,6 @@ a.site-header__switch-option:hover {
   .project-card:not(:first-child) {
     padding-top: 24px;
     border-top: 1px solid var(--border);
-  }
-
-  #trabajo .work-track,
-  #work .work-track {
-    gap: 24px;
   }
 }
 
@@ -595,6 +591,20 @@ a.site-header__switch-option:hover {
   z-index: 3;
 }
 
+/* Standalone sobre-mi.html/about.html only — the home page's #trabajo/#work
+   isn't a .work-section--rise. */
+#trabajo.work-section--rise .page-header,
+#work.work-section--rise .page-header {
+  padding: 48px 48px 16px;
+}
+
+@media (max-width: 639px) {
+  #trabajo.work-section--rise .page-header,
+  #work.work-section--rise .page-header {
+    padding-inline: 24px;
+  }
+}
+
 @media (min-width: 1024px) {
   .work-section--rise {
     display: flex;
@@ -608,6 +618,61 @@ a.site-header__switch-option:hover {
      the pin releases (see about.js / initHorizontalScroll). */
   .work-section--rise > .site-footer {
     margin-top: auto;
+  }
+}
+
+/* Mobile + tablet: same horizontal card row as desktop, but the desktop
+   version is driven by GSAP pinning vertical scroll into horizontal motion
+   (see initHorizontalScroll / MEDIA.desktopPointerFineMotion, gated to
+   pointer:fine + 1024px so it never engages here). Touch has no scroll
+   wheel to hijack, so instead the track is a plain native horizontally
+   scrollable strip the user can drag/swipe — no JS needed. */
+@media (max-width: 1023px) {
+  #trabajo .work-scroll,
+  #work .work-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 32px;
+  }
+
+  #trabajo .work-scroll::-webkit-scrollbar,
+  #work .work-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  #trabajo .work-track,
+  #work .work-track {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: calc(32px * var(--work-card-scale, 1));
+  }
+
+  #trabajo .project-card,
+  #work .project-card {
+    width: calc(440px * var(--work-card-scale, 1));
+    flex-shrink: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  /* Browsers don't reserve a horizontally-scrolling container's own
+     trailing padding once scrolled to the end (flex/grid quirk — the
+     leading padding-left works fine, only the end is dropped), so
+     .work-scroll's padding-right disappears and the last card ends up
+     flush with the viewport edge. A real flex item can't be dropped like
+     that, so a spacer sized to that same padding stands in for it. */
+  #trabajo .work-track::after,
+  #work .work-track::after {
+    content: "";
+    flex: 0 0 16px;
+  }
+}
+
+@media (max-width: 639px) {
+  #trabajo .project-card,
+  #work .project-card {
+    max-width: 80vw;
   }
 }
 
@@ -1358,6 +1423,12 @@ a.site-header__switch-option:hover {
 
 .about-hero-pin {
   position: relative;
+  height: 200vh;
+}
+
+.about-hero-pin .about-hero__media {
+  position: sticky;
+  top: 0;
 }
 
 .about-hero-pin + .about-reveal {
@@ -1365,17 +1436,6 @@ a.site-header__switch-option:hover {
   z-index: 2;
   margin-top: -100vh;
   isolation: isolate;
-}
-
-@media (min-width: 768px) {
-  .about-hero-pin {
-    height: 200vh;
-  }
-
-  .about-hero-pin .about-hero__media {
-    position: sticky;
-    top: 0;
-  }
 }
 
 .about-reveal {
@@ -1418,14 +1478,55 @@ a.site-header__switch-option:hover {
   pointer-events: none;
 }
 
+.about-hero__scroll-hint {
+  display: none;
+  pointer-events: none;
+}
+
+@media (max-width: 639px) {
+  .about-hero__scroll-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transform: translateX(-50%);
+    color: var(--cream);
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    animation: about-hero-scroll-hint-bounce 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes about-hero-scroll-hint-bounce {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-hero__scroll-hint {
+    animation: none;
+  }
+}
+
 .about-hero__content {
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
   margin-top: -200vh;
-  padding: 32px 24px;
+  padding-block: 100px;
+  padding-inline: 24px;
 }
 
 .about-hero__greeting {
@@ -1457,7 +1558,7 @@ a.site-header__switch-option:hover {
 
 @media (min-width: 640px) {
   .about-hero__content {
-    padding: 32px 48px;
+    padding-inline: 48px;
   }
 }
 
@@ -1481,6 +1582,13 @@ a.site-header__switch-option:hover {
 #sobre-mi,
 #about {
   margin-top: 120px;
+}
+
+/* Standalone sobre-mi.html/about.html only — id+class beats the bare-id
+   rule above so this doesn't touch the home page's #sobre-mi/#about. */
+#sobre-mi.about-reveal,
+#about.about-reveal {
+  margin-top: 0;
 }
 
 @media (max-width: 639px) {
@@ -1733,13 +1841,15 @@ a.site-header__switch-option:hover {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .about-grid {
     grid-template-columns: 1fr 1fr;
     align-items: start;
   }
 
   .about-grid__media {
+    position: sticky;
+    top: 0;
     height: 100vh;
   }
 }
