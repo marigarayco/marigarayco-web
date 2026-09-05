@@ -78,3 +78,30 @@
     document.addEventListener("DOMContentLoaded", showNotice);
   }
 })();
+
+// Evento clave: clics en los canales de contacto (WhatsApp, mail, LinkedIn, Behance).
+(function () {
+  function matchMethod(href) {
+    if (!href) return null;
+    if (href.indexOf("mailto:") === 0) return "email";
+    if (href.indexOf("wa.me") !== -1 || href.indexOf("whatsapp.com") !== -1) return "whatsapp";
+    if (href.indexOf("linkedin.com") !== -1) return "linkedin";
+    if (href.indexOf("behance.net") !== -1) return "behance";
+    return null;
+  }
+
+  document.addEventListener(
+    "click",
+    function (event) {
+      var link = event.target.closest && event.target.closest("a[href]");
+      if (!link) return;
+      var method = matchMethod(link.getAttribute("href"));
+      if (!method || typeof window.gtag !== "function") return;
+      window.gtag("event", "contact_click", {
+        method: method,
+        page_path: window.location.pathname,
+      });
+    },
+    true
+  );
+})();
